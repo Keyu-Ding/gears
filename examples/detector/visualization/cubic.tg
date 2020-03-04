@@ -1,0 +1,23 @@
+:volu hall BOX 20 20 20 G4_AIR
+:vis hall OFF
+
+//avoid same surface
+:solid inner BOX 17 15 15
+:solid outer BOX 16 16 16
+
+:rotm r000 0 0 0
+//rotational matrix, <r000><name>,<0,0,0><x,y,z angel>
+:rotm ry90 0 90 0
+:rotm rz90 0 0 90
+
+:solid prim0 SUBTRACTION outer inner r000 0 0 0
+//rotational matrix,<r000><name>,<0,0,0><x,y,z position>
+:solid prim1 SUBTRACTION prim0 inner ry90 0 0 0
+:solid prim2 SUBTRACTION prim1 inner rz90 0 0 0
+
+//final result
+:volu frame prim2 G4_AIR
+
+:color frame 0.8 0.8 0.8
+
+:place frame 1 hall r000 0 0 0
